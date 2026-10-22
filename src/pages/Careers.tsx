@@ -99,6 +99,7 @@ const Careers = () => {
     gradYear: "",
     portfolioUrl: "",
     coverLetter: "",
+    resumeUrl: "",
   });
 
   const categories = ["All", "Development", "Design & Content", "Data & Business", "QA & AI"];
@@ -129,7 +130,7 @@ const Careers = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const emailData = {
+    const emailData: Record<string, string> = {
       name: applicationForm.fullName,
       email: applicationForm.email,
       company: `Degree: ${applicationForm.degree} (Grad: ${applicationForm.gradYear})`,
@@ -141,11 +142,12 @@ Phone: ${applicationForm.phone}
 Target Role: ${applicationForm.roleTitle}
 Degree/Branch: ${applicationForm.degree}
 Graduation Year: ${applicationForm.gradYear}
-Resume/Portfolio/GitHub: ${applicationForm.portfolioUrl}
+Resume Link: ${applicationForm.resumeUrl || "Not provided"}
+Portfolio / GitHub: ${applicationForm.portfolioUrl || "Not provided"}
 
 Cover Letter / Candidate Message:
 ${applicationForm.coverLetter || "No note provided."}
-      `.trim()
+      `.trim(),
     };
 
     try {
@@ -170,6 +172,7 @@ ${applicationForm.coverLetter || "No note provided."}
         gradYear: "",
         portfolioUrl: "",
         coverLetter: "",
+        resumeUrl: "",
       });
       setActiveModalRole(null);
     } catch (error: any) {
@@ -679,18 +682,35 @@ ${applicationForm.coverLetter || "No note provided."}
                   </div>
                 </div>
 
-                <div>
-                  <label className="text-xs font-display uppercase tracking-wider text-muted-foreground mb-1.5 block">
-                    Resume / Portfolio / GitHub Link *
-                  </label>
-                  <input
-                    type="url"
-                    required
-                    placeholder="https://drive.google.com/... or github.com/username or linkedin.com/in/..."
-                    value={applicationForm.portfolioUrl}
-                    onChange={(e) => setApplicationForm({ ...applicationForm, portfolioUrl: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-muted/50 border border-border text-sm text-foreground focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/10 transition-all"
-                  />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs font-display uppercase tracking-wider text-muted-foreground mb-1.5 block">
+                      Resume Link (Google Drive / OneDrive) *
+                    </label>
+                    <input
+                      type="url"
+                      required
+                      placeholder="https://drive.google.com/..."
+                      value={applicationForm.resumeUrl}
+                      onChange={(e) => setApplicationForm({ ...applicationForm, resumeUrl: e.target.value })}
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-muted/50 border border-border text-sm text-foreground focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/10 transition-all"
+                    />
+                    <p className="text-[11px] text-muted-foreground mt-1.5">
+                      📎 Google Drive / OneDrive / Dropbox link paste karein. Link publicly accessible hona chahiye.
+                    </p>
+                  </div>
+                  <div>
+                    <label className="text-xs font-display uppercase tracking-wider text-muted-foreground mb-1.5 block">
+                      Portfolio / GitHub Link
+                    </label>
+                    <input
+                      type="url"
+                      placeholder="https://github.com/..."
+                      value={applicationForm.portfolioUrl}
+                      onChange={(e) => setApplicationForm({ ...applicationForm, portfolioUrl: e.target.value })}
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-muted/50 border border-border text-sm text-foreground focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/10 transition-all"
+                    />
+                  </div>
                 </div>
 
                 <div>

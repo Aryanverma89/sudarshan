@@ -20,7 +20,7 @@ export interface InternshipRole {
   category: "Development" | "Design & Content" | "Data & Business" | "QA & AI";
   icon: any;
   department: string;
-  location: "Lucknow (Hybrid)" | "Remote" | "On-site (Lucknow)";
+  location: "Remote / Hybrid" | string;
   duration: string;
   type: "Full-Time Internship" | "Part-Time Internship";
   stipend: string;
@@ -41,7 +41,7 @@ export const internshipRoles: InternshipRole[] = [
     category: "QA & AI",
     icon: CheckSquare,
     department: "Quality Engineering",
-    location: "Lucknow (Hybrid)",
+    location: "Remote / Hybrid",
     duration: "3 Months",
     type: "Full-Time Internship",
     stipend: "Performance Stipend + Certificate",
@@ -114,7 +114,7 @@ export const internshipRoles: InternshipRole[] = [
     category: "Development",
     icon: Code2,
     department: "Engineering",
-    location: "Lucknow (Hybrid)",
+    location: "Remote / Hybrid",
     duration: "3 - 6 Months",
     type: "Full-Time Internship",
     stipend: "Performance Stipend + PPO Opportunity",
@@ -184,7 +184,7 @@ export const internshipRoles: InternshipRole[] = [
     category: "Design & Content",
     icon: Palette,
     department: "Design & Creative",
-    location: "Lucknow (Hybrid)",
+    location: "Remote / Hybrid",
     duration: "3 Months",
     type: "Full-Time Internship",
     stipend: "Performance Stipend",
@@ -226,7 +226,7 @@ export const internshipRoles: InternshipRole[] = [
     category: "Data & Business",
     icon: FileSpreadsheet,
     department: "Business Operations",
-    location: "Lucknow (Hybrid)",
+    location: "Remote / Hybrid",
     duration: "3 Months",
     type: "Full-Time Internship",
     stipend: "Performance Stipend",
@@ -314,7 +314,7 @@ export const internFaqs = [
   },
   {
     question: "Are remote internships available?",
-    answer: "Yes! AI Content & Reels, Social Media Marketing, and Product Research offer Remote options. App Testing & Web Development are Hybrid/Remote."
+    answer: "Yes! All internship roles offer Remote / Hybrid work options so you can contribute flexibly from home or from our office."
   },
   {
     question: "Will I get a Pre-Placement Offer (PPO)?",

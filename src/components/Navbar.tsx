@@ -18,6 +18,7 @@ const navItems = [
       { label: "ERP / CRM Solutions", path: "/services/erp-crm" },
     ],
   },
+  { label: "Portfolio", path: "/portfolio" },
   { label: "About", path: "/about" },
   { label: "Careers", path: "/careers" },
   { label: "Blog", path: "/blog" },
@@ -40,6 +41,8 @@ const Navbar = () => {
     setIsOpen(false);
     setActiveDropdown(null);
   }, [location]);
+
+  const isHomeHero = location.pathname === "/" && !scrolled;
 
   return (
     <>
@@ -73,12 +76,18 @@ const Navbar = () => {
                 >
                   <Link
                     to={item.path}
-                    className={`btn-ghost text-xs uppercase tracking-wider ${
-                      location.pathname === item.path ? "text-foreground" : ""
+                    className={`text-xs uppercase tracking-wider transition-all duration-300 ${
+                      isHomeHero
+                        ? `inline-flex items-center justify-center gap-1 px-4 py-2 rounded-lg font-display font-medium text-white/90 hover:text-white hover:bg-white/10 ${
+                            location.pathname === item.path ? "text-white font-semibold" : ""
+                          }`
+                        : `btn-ghost ${
+                            location.pathname === item.path ? "text-foreground font-semibold" : ""
+                          }`
                     }`}
                   >
                     {item.label}
-                    {item.children && <ChevronDown className="w-3 h-3 ml-1" />}
+                    {item.children && <ChevronDown className={`w-3 h-3 ml-1 ${isHomeHero ? "text-white/80" : ""}`} />}
                   </Link>
 
                   <AnimatePresence>
@@ -116,7 +125,9 @@ const Navbar = () => {
 
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden p-2 text-foreground"
+              className={`lg:hidden p-2 transition-colors ${
+                isHomeHero ? "text-white" : "text-foreground"
+              }`}
               aria-label="Toggle menu"
             >
               {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

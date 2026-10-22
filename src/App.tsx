@@ -23,6 +23,8 @@ const SocialMedia = lazy(() => import("./pages/SocialMedia"));
 const AIAutomation = lazy(() => import("./pages/AIAutomation"));
 const ERPCRM = lazy(() => import("./pages/ERPCRM"));
 const About = lazy(() => import("./pages/About"));
+const Portfolio = lazy(() => import("./pages/Portfolio"));
+const CaseStudies = lazy(() => import("./pages/CaseStudies"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 const Contact = lazy(() => import("./pages/Contact"));
@@ -61,6 +63,8 @@ const AnimatedRoutes = () => {
             <Route path="/services/social-media" element={<Suspense fallback={<PageLoader />}><SocialMedia /></Suspense>} />
             <Route path="/services/ai-automation" element={<Suspense fallback={<PageLoader />}><AIAutomation /></Suspense>} />
             <Route path="/services/erp-crm" element={<Suspense fallback={<PageLoader />}><ERPCRM /></Suspense>} />
+            <Route path="/portfolio" element={<Suspense fallback={<PageLoader />}><Portfolio /></Suspense>} />
+            <Route path="/case-studies" element={<Suspense fallback={<PageLoader />}><CaseStudies /></Suspense>} />
             <Route path="/about" element={<Suspense fallback={<PageLoader />}><About /></Suspense>} />
             <Route path="/blog" element={<Suspense fallback={<PageLoader />}><Blog /></Suspense>} />
             <Route path="/blog/:slug" element={<Suspense fallback={<PageLoader />}><BlogPost /></Suspense>} />
