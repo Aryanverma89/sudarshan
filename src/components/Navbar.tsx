@@ -18,6 +18,15 @@ const navItems = [
       { label: "ERP / CRM Solutions", path: "/services/erp-crm" },
     ],
   },
+  {
+    label: "Products",
+    path: "#",
+    children: [
+      { label: "QR Studio", path: "" },
+      { label: "CRM", path: "" },
+      { label: "Sikka Games App", path: "" },
+    ],
+  },
   { label: "Portfolio", path: "/portfolio" },
   { label: "About", path: "/about" },
   { label: "Careers", path: "/careers" },
@@ -56,17 +65,17 @@ const Navbar = () => {
             : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="flex items-center justify-between h-16 lg:h-20">
             <Link to="/" className="flex items-center gap-3">
-              <img src={logo} alt="Sudarshan Technologies" className="h-14 w-14 drop-shadow-lg" />
+              <img src={logo} alt="Sudarshan Technologies" className="h-12 w-12 sm:h-14 sm:w-14 drop-shadow-lg" />
               <span className="font-display font-bold text-xl text-foreground leading-tight">
                 <span className="text-gradient bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 bg-clip-text text-transparent font-extrabold tracking-tight">Sudarshan</span>
                 <span className="text-cyan-400/80 font-light block text-[10px] tracking-[0.3em] uppercase">Technologies</span>
               </span>
             </Link>
 
-            <div className="hidden lg:flex items-center gap-1">
+            <div className="hidden lg:flex items-center gap-0.5 xl:gap-1">
               {navItems.map((item) => (
                 <div
                   key={item.label}
@@ -76,18 +85,32 @@ const Navbar = () => {
                 >
                   <Link
                     to={item.path}
+                    onClick={(e) => {
+                      if (item.path === "#" || !item.path) {
+                        e.preventDefault();
+                        if (item.children) {
+                          setActiveDropdown(activeDropdown === item.label ? null : item.label);
+                        }
+                      }
+                    }}
                     className={`text-xs uppercase tracking-wider transition-all duration-300 ${
                       isHomeHero
-                        ? `inline-flex items-center justify-center gap-1 px-4 py-2 rounded-lg font-display font-medium text-white/90 hover:text-white hover:bg-white/10 ${
+                        ? `inline-flex items-center justify-center gap-1 px-3 xl:px-3.5 py-2 rounded-lg font-display font-medium text-white/90 hover:text-white hover:bg-white/10 ${
                             location.pathname === item.path ? "text-white font-semibold" : ""
                           }`
-                        : `btn-ghost ${
+                        : `btn-ghost px-3 xl:px-3.5 py-2 ${
                             location.pathname === item.path ? "text-foreground font-semibold" : ""
                           }`
                     }`}
                   >
                     {item.label}
-                    {item.children && <ChevronDown className={`w-3 h-3 ml-1 ${isHomeHero ? "text-white/80" : ""}`} />}
+                    {item.children && (
+                      <ChevronDown
+                        className={`w-3 h-3 ml-1 transition-transform duration-200 ${
+                          activeDropdown === item.label ? "rotate-180" : ""
+                        } ${isHomeHero ? "text-white/80" : ""}`}
+                      />
+                    )}
                   </Link>
 
                   <AnimatePresence>
@@ -97,18 +120,46 @@ const Navbar = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 8 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute top-full left-0 pt-2 w-56"
+                        className="absolute top-full left-0 pt-2 w-56 z-50"
                       >
-                        <div className="glass-card p-2 shadow-lg">
-                          {item.children.map((child) => (
-                            <Link
-                              key={child.path}
-                              to={child.path}
-                              className="block px-4 py-2.5 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                            >
-                              {child.label}
-                            </Link>
-                          ))}
+                        <div className="glass-card p-2 shadow-xl border border-border/80 bg-card/95 backdrop-blur-xl rounded-xl">
+                          {item.children.map((child) => {
+                            const isExternal = child.path && (child.path.startsWith("http://") || child.path.startsWith("https://"));
+                            const isBlank = !child.path || child.path === "#";
+
+                            if (isExternal) {
+                              return (
+                                <a
+                                  key={child.label}
+                                  href={child.path}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="block px-4 py-2.5 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                                >
+                                  {child.label}
+                                </a>
+                              );
+                            }
+
+                            return (
+                              <Link
+                                key={child.label}
+                                to={child.path || "#"}
+                                onClick={(e) => {
+                                  if (isBlank) {
+                                    e.preventDefault();
+                                  } else {
+                                    setActiveDropdown(null);
+                                  }
+                                }}
+                                className={`block px-4 py-2.5 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors ${
+                                  isBlank ? "cursor-pointer" : ""
+                                }`}
+                              >
+                                {child.label}
+                              </Link>
+                            );
+                          })}
                         </div>
                       </motion.div>
                     )}
@@ -149,33 +200,67 @@ const Navbar = () => {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 20, opacity: 0 }}
               transition={{ type: "spring", duration: 0.6, bounce: 0 }}
-              className="flex flex-col pt-28 px-8 gap-4 overflow-y-auto pb-24"
+              className="flex flex-col pt-24 px-8 gap-4 overflow-y-auto pb-24"
             >
               {navItems.map((item, i) => (
                 <motion.div
                   key={item.label}
                   initial={{ opacity: 0, y: 20, filter: "blur(5px)" }}
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  transition={{ delay: i * 0.08, type: "spring", stiffness: 80, damping: 20 }}
+                  transition={{ delay: i * 0.06, type: "spring", stiffness: 80, damping: 20 }}
                   className="border-b border-border/50 pb-4 last:border-0"
                 >
                   <Link
                     to={item.path}
+                    onClick={(e) => {
+                      if (item.path === "#" || !item.path) {
+                        e.preventDefault();
+                      } else {
+                        setIsOpen(false);
+                      }
+                    }}
                     className="block text-2xl font-display font-bold text-foreground hover:text-primary transition-colors"
                   >
                     {item.label}
                   </Link>
                   {item.children && (
-                    <div className="pl-6 mt-4 space-y-3 border-l-2 border-primary/20">
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.path}
-                          to={child.path}
-                          className="block text-base text-muted-foreground hover:text-primary transition-colors"
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
+                    <div className="pl-6 mt-3 space-y-2.5 border-l-2 border-primary/20">
+                      {item.children.map((child) => {
+                        const isExternal = child.path && (child.path.startsWith("http://") || child.path.startsWith("https://"));
+                        const isBlank = !child.path || child.path === "#";
+
+                        if (isExternal) {
+                          return (
+                            <a
+                              key={child.label}
+                              href={child.path}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={() => setIsOpen(false)}
+                              className="block text-base text-muted-foreground hover:text-primary transition-colors"
+                            >
+                              {child.label}
+                            </a>
+                          );
+                        }
+
+                        return (
+                          <Link
+                            key={child.label}
+                            to={child.path || "#"}
+                            onClick={(e) => {
+                              if (isBlank) {
+                                e.preventDefault();
+                              } else {
+                                setIsOpen(false);
+                              }
+                            }}
+                            className="block text-base text-muted-foreground hover:text-primary transition-colors"
+                          >
+                            {child.label}
+                          </Link>
+                        );
+                      })}
                     </div>
                   )}
                 </motion.div>
@@ -186,10 +271,14 @@ const Navbar = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
+              transition={{ delay: 0.3 }}
               className="px-8 pb-10 pt-4 bg-background/50 border-t border-border/50"
             >
-              <Link to="/contact" className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-display font-bold text-sm bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 text-blue-950 transition-all shadow-lg hover:shadow-xl active:scale-[0.98]">
+              <Link
+                to="/contact"
+                onClick={() => setIsOpen(false)}
+                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-display font-bold text-sm bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 text-blue-950 transition-all shadow-lg hover:shadow-xl active:scale-[0.98]"
+              >
                 Start Your Project
               </Link>
               <p className="text-center text-xs text-muted-foreground mt-4">

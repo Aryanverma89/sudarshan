@@ -520,15 +520,15 @@ ${applicationForm.coverLetter || "No note provided."}
                 Don't See Your <span className="text-gradient">Exact Role</span>?
               </h2>
               <p className="mt-4 text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
-                We are always excited to welcome passionate learners! Send your Resume/Portfolio directly to our HR & Engineering leads or chat with us on WhatsApp.
+                We are always excited to welcome passionate learners! Send your Resume/Portfolio directly to our HR & Engineering leads.
               </p>
               
               <div className="mt-8 flex flex-wrap justify-center items-center gap-4">
                 <a 
-                  href="mailto:careers@sudarshantech.com?subject=Direct%20Internship%20Application%20-%20Sudarshan%20Technologies" 
+                  href="mailto:connect@sudarshantechnologies.com?subject=Direct%20Internship%20Application%20-%20Sudarshan%20Technologies" 
                   className="btn-primary text-xs py-3 px-6 rounded-xl flex items-center gap-2"
                 >
-                  <Mail className="w-4 h-4" /> Email Resume (careers@sudarshantech.com)
+                  <Mail className="w-4 h-4" /> Email Resume (connect@sudarshantechnologies.com)
                 </a>
                 <a 
                   href="https://wa.me/917376742022?text=Hello%20Sudarshan%20Technologies!%20I%20want%20to%20apply%20for%20an%20internship." 
@@ -536,7 +536,7 @@ ${applicationForm.coverLetter || "No note provided."}
                   rel="noopener noreferrer" 
                   className="btn-secondary text-xs py-3 px-6 rounded-xl flex items-center gap-2 text-blue-950 font-bold"
                 >
-                  <MessageCircle className="w-4 h-4" /> WhatsApp Us (+91 73767 42022)
+                  <MessageCircle className="w-4 h-4 text-[#25D366]" /> WhatsApp Us (+91 73767 42022)
                 </a>
               </div>
             </div>
@@ -727,25 +727,38 @@ ${applicationForm.coverLetter || "No note provided."}
                 </div>
 
                 {/* Form Footer */}
-                <div className="pt-4 flex items-center justify-end gap-3 border-t border-border">
-                  <button
-                    type="button"
-                    onClick={handleCloseModal}
-                    className="btn-outline text-xs py-2.5 px-4 rounded-xl"
+                <div className="pt-4 flex flex-col gap-3 border-t border-border">
+                  <div className="flex items-center justify-end gap-3">
+                    <button
+                      type="button"
+                      onClick={handleCloseModal}
+                      className="btn-outline text-xs py-2.5 px-4 rounded-xl"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="btn-primary text-xs py-2.5 px-6 rounded-xl flex items-center gap-2 disabled:opacity-70"
+                    >
+                      {isSubmitting ? (
+                        <>Submitting <Loader2 className="w-4 h-4 animate-spin" /></>
+                      ) : (
+                        <>Submit Application <Send className="w-4 h-4" /></>
+                      )}
+                    </button>
+                  </div>
+                  <a
+                    href={`https://wa.me/917376742022?text=${encodeURIComponent(
+                      `Hello Sudarshan Technologies! I want to apply for ${applicationForm.roleTitle || "an internship"}. My name is ${applicationForm.fullName || ""}. Email: ${applicationForm.email || ""}, Phone: ${applicationForm.phone || ""}. Resume Link: ${applicationForm.resumeUrl || ""}`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs font-semibold bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white border border-[#25D366]/30 transition-all duration-300 shadow-sm"
                   >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="btn-primary text-xs py-2.5 px-6 rounded-xl flex items-center gap-2 disabled:opacity-70"
-                  >
-                    {isSubmitting ? (
-                      <>Submitting <Loader2 className="w-4 h-4 animate-spin" /></>
-                    ) : (
-                      <>Submit Application <Send className="w-4 h-4" /></>
-                    )}
-                  </button>
+                    <MessageCircle className="w-4 h-4" />
+                    <span>Send Application via WhatsApp (+91 73767 42022)</span>
+                  </a>
                 </div>
               </form>
             </motion.div>

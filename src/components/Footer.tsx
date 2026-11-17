@@ -40,19 +40,17 @@ const Footer = () => (
 
           <div className="mt-5 space-y-3">
             <a href="https://wa.me/917376742022" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-white/60 text-sm hover:text-secondary transition-colors">
-              <MessageCircle className="w-3.5 h-3.5" /> +91 73767 42022 (WhatsApp)
+              <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" /> +91 73767 42022 (WhatsApp)
             </a>
-            <a href="tel:+919305370277" className="flex items-center gap-2 text-white/60 text-sm hover:text-secondary transition-colors">
-              <Phone className="w-3.5 h-3.5" /> +91 93053 70277
+            <a href="tel:+918960804082" className="flex items-center gap-2 text-white/60 text-sm hover:text-secondary transition-colors">
+              <Phone className="w-3.5 h-3.5" /> +91 8960804082
             </a>
-            <a href="tel:+917376742022" className="flex items-center gap-2 text-white/60 text-sm hover:text-secondary transition-colors">
-              <Phone className="w-3.5 h-3.5" /> +91 73767 42022
-            </a>
+            
             <a href="mailto:connect@sudarshantechnologies.com" className="flex items-center gap-2 text-white/60 text-sm hover:text-secondary transition-colors">
               <Mail className="w-3.5 h-3.5" /> connect@sudarshantechnologies.com
             </a>
             <a href="https://maps.app.goo.gl/MEzbKv3nMMHUV8w57" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-white/60 text-sm hover:text-secondary transition-colors">
-              <MapPin className="w-3.5 h-3.5 flex-shrink-0" /> Tej Kumar Plaza, Hazratganj, Lucknow
+              <MapPin className="w-3.5 h-3.5 flex-shrink-0" /> Adarsh Nagar, Matyari, Lucknow, Uttar Pradesh, India
             </a>
           </div>
 

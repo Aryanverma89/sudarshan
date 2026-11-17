@@ -198,7 +198,7 @@ export default function ChatWidget() {
                     {t("What services do you offer?", "आप कौन सी सेवाएँ देते हैं?")}
                   </button>
                   <button onClick={() => handleOptionClick(t("Where are you located?", "आपका ऑफिस कहाँ है?"), () => {
-                    addMessage(t("Our office is located at Tej Kumar Plaza, Sushanpura, Hazratganj, Lucknow, UP 226001.", "हमारा ऑफिस तेज कुमार प्लाजा, सुशानपुरा, हजरतगंज, लखनऊ, यूपी 226001 में स्थित है।"), 'bot');
+                    addMessage(t("Our office is located at Adarsh Nagar, Matyari, Lucknow, Uttar Pradesh, India.", "हमारा ऑफिस आदर्श नगर, मटियारी, लखनऊ, उत्तर प्रदेश, भारत में स्थित है।"), 'bot');
                     setStep('INIT');
                   })} className="text-left text-sm bg-background border border-border text-muted-foreground hover:bg-muted/50 px-4 py-2 rounded-xl transition-colors">
                     {t("Where are you located?", "आपका ऑफिस कहाँ है?")}
@@ -313,7 +313,7 @@ export default function ChatWidget() {
                 transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.1 }}
               >
                 <span className="bg-background text-foreground text-xs font-medium py-1.5 px-3 rounded-lg shadow-md border border-border opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                  WhatsApp
+                  WhatsApp (+91 73767 42022)
                 </span>
                 <div className="w-12 h-12 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
                   <MessageCircle className="w-5 h-5" />
@@ -322,7 +322,7 @@ export default function ChatWidget() {
 
               {/* Call Us (Diagonal) */}
               <motion.a 
-                href="tel:+919305370277" 
+                href="tel:+918960804082" 
                 className="absolute right-1 bottom-1 flex items-center gap-3 group whitespace-nowrap z-40"
                 initial={{ opacity: 0, scale: 0, x: 0, y: 0 }}
                 animate={{ opacity: 1, scale: 1, x: -60, y: -65 }}
@@ -330,7 +330,7 @@ export default function ChatWidget() {
                 transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.05 }}
               >
                 <span className="bg-background text-foreground text-xs font-medium py-1.5 px-3 rounded-lg shadow-md border border-border opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                  Call Us
+                  Call Us (+91 8960804082)
                 </span>
                 <div className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
                   <Phone className="w-5 h-5" />
